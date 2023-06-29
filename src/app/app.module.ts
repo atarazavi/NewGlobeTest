@@ -13,10 +13,10 @@ import { MaterialDesignModule } from './shared/materialdesign/materialdesign.mod
   ],
   imports: [
     BrowserModule,
-    MaterialDesignModule,
     SchoolsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MaterialDesignModule,
   ],
   providers: [
 
