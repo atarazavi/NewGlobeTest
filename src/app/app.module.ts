@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { SchoolsModule } from './features/schools/schools.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { MaterialDesignModule } from './shared/materialdesign/materialdesign.module';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
+    MaterialDesignModule,
     SchoolsModule,
     HttpClientModule,
     BrowserAnimationsModule,

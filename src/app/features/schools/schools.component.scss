@@ -1,3 +1,23 @@
 tr.example-detail-row {
   height: 0 !important;
 }
+.mat-mdc-card {
+  padding: 2rem;
+}
+.example-element-row td {
+  border-bottom-width: 0;
+}
+.example-expanded-row + tr .example-element-detail {
+  padding: 10px;
+  text-align: right;
+}
+tr td:last-child {
+  text-align: right;
+}
+.expand_list_container {
+  text-align: left;
+}
+.expanded_row_title {
+  display: flex;
+  align-items: center;
+}
