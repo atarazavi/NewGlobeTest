@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SchoolsComponent } from './schools.component';
 import { SchoolBatteriesDataStore } from './store/school-batteries-data.store';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { SchoolsModule } from './schools.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('SchoolsComponent', () => {
   let component: SchoolsComponent;
@@ -18,6 +20,8 @@ describe('SchoolsComponent', () => {
       ],
       imports: [
         HttpClientTestingModule,
+        SchoolsModule,
+        BrowserAnimationsModule
       ]
     });
     fixture = TestBed.createComponent(SchoolsComponent);
