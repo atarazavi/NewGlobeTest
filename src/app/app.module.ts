@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { SchoolsModule } from './features/schools/schools.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -11,6 +13,8 @@ import { SchoolsModule } from './features/schools/schools.module';
   imports: [
     BrowserModule,
     SchoolsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [
 
