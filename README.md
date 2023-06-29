@@ -1,27 +1,44 @@
-# BatteriesSupport
+# Battery Issues Detector
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.2.
+This project is a tool for detecting and reporting on e-ink device battery health in different schools. The main goal of this application is to identify schools with the highest number of battery issues so that field teams can effectively plan their visits.
 
-## Development server
+# Design and Assumptions
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+The application is designed using Angular, with a focus on scalability and optimization.
+The data is fetched from a provided JSON file, treated as an API.
+The battery consumption is calculated based on battery readings. We assumed a battery is in need of replacement if it uses more than 30% of its battery per day on average.
+If the battery level increases between measurements, it is assumed that the device was charged, and this increase is excluded from the daily usage calculation.
+If there is only one data point for a device, its battery consumption is marked as "unknown", and it's not included in the final output.
+The final output is a list of schools, each with their own list of devices that have battery issues.
 
-## Code scaffolding
+# Instructions to Run the Application
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Clone the repository to your local machine.
+Navigate to the cloned repository in your terminal.
+Run npm install to install all the necessary dependencies.
+Run ng serve to start the application.
+Open http://localhost:4200 in your web browser to view the application.
 
-## Build
+# Instructions to Run the Tests
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Navigate to the project directory in your terminal.
+Run ng test to start the test suite.
+A new tab will open in your default web browser showing the test results.
 
-## Running unit tests
+# Folder Structure
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The application is organized into the following folders:
 
-## Running end-to-end tests
+src/app/: Contains the main application features and shared components ,services, and models.
+features/: Contains main features including its related Angular components/models/services/ngrx-store for displaying data.
+features/schools/: Contains the SchoolsComponent for displaying the list of schools.
+features/services/: Contains service for fetching data.
+data.service.ts: Contains the DataService for fetching battery data.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+shared/: Contain whatever that can be used by different features
+shared/services/data-analyzer.service.ts: Contains app config model.
+shared/models/: Contains TypeScript classes for School and Device objects.
 
-## Further help
+src/assets/: Contains static assets, such as the provided JSON data file and Logo image.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Please note that you must have Node.js and Angular CLI installed on your machine to run this application and its tests.
