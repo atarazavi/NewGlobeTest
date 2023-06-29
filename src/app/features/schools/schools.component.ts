@@ -1,13 +1,14 @@
+import { DataAnalyzerService } from './../../shared/services/Data-Analyzer/data-analyzer.service';
 import { Component, ViewChild } from '@angular/core';
 import { SchoolBatteries } from './models/school-batteries.interface';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Observable, Subject, filter, takeUntil } from 'rxjs';
 import { SchoolBatteriesDataStore } from './store/school-batteries-data.store';
 import { HttpErrorResponse } from '@angular/common/http';
 import { isNotNull } from 'src/app/shared/typescript/nullCheck';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { School } from './models/school.interface';
 
 @Component({
   selector: 'app-schools',
@@ -29,16 +30,16 @@ export class SchoolsComponent {
   schoolBatteriesDataError$: Observable<HttpErrorResponse | null>;
   columnsToDisplay: string[];
   columnsToDisplayWithExpand: string[];
-  dataSource: MatTableDataSource<SchoolBatteries>;
+  dataSource: MatTableDataSource<School>;
   expandedElement: SchoolBatteries | null;
   private readonly destroyed$ = new Subject<void>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatTable) table: MatTable<SchoolBatteries>;
+  @ViewChild(MatTable) table: MatTable<School>;
 
   constructor(
     public schoolBatteriesDataStore: SchoolBatteriesDataStore,
+    private dataAnalyzerService: DataAnalyzerService,
   ) {
     this.schoolBatteriesData$ = schoolBatteriesDataStore.schoolBatteriesData$;
     this.schoolBatteriesDataError$ = schoolBatteriesDataStore.schoolBatteriesDataError$;
@@ -58,14 +59,10 @@ export class SchoolsComponent {
         takeUntil(this.destroyed$),
       )
       .subscribe(response => {
-        this.dataSource = new MatTableDataSource(response);
+        const analyzedSchools: School[] = this.dataAnalyzerService.calculateBatteryConsumption(response);
+        this.dataSource = new MatTableDataSource(analyzedSchools);
         setTimeout(() => {
           this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-          const sortState: Sort = { active: 'Number Of Corrupted Batteries', direction: 'asc' };
-          this.sort.active = sortState.active;
-          this.sort.direction = sortState.direction;
-          this.sort.sortChange.emit(sortState);
         });
       });
   }

@@ -1,4 +1,4 @@
-<h1>Users</h1>
+<h1>Schools</h1>
 <div class="container">
   <div class="table_top_toolbar">
     <mat-form-field appearance="outline" class="table_search_field">
@@ -20,21 +20,14 @@
     >
       <ng-container *ngIf="dataSource && !(schoolBatteriesDataError$ | async)">
         <div class="table_container">
-          <table
-            mat-table
-            [dataSource]="dataSource"
-            matSort
-            multiTemplateDataRows
-          >
+          <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
             <caption style="display: none">
               List of Users
             </caption>
 
             <!-- Academy ID Column -->
             <ng-container matColumnDef="Academy ID">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                Academy ID
-              </th>
+              <th mat-header-cell *matHeaderCellDef>Academy ID</th>
               <td mat-cell *matCellDef="let row">
                 {{ row.academyId }}
               </td>
@@ -42,11 +35,11 @@
 
             <!-- Number Of Corrupted Batteries Column -->
             <ng-container matColumnDef="Number Of Corrupted Batteries">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <th mat-header-cell *matHeaderCellDef>
                 Number Of Corrupted Batteries
               </th>
               <td mat-cell *matCellDef="let row">
-                {{ row.employeeId }}
+                {{ row.unhealthyDevices.length }}
               </td>
             </ng-container>
 
@@ -89,8 +82,12 @@
                 >
                   <mat-chip-listbox class="example-chip">
                     Corrupted Batteries:
-                    <mat-chip-option class="example-box" cdkDrag>
-                      {{ element.serialNumber }}
+                    <mat-chip-option
+                      class="example-box"
+                      cdkDrag
+                      *ngFor="let unhealthyBattery of element.unhealthyDevices"
+                    >
+                      {{ unhealthyBattery }}
                     </mat-chip-option>
                   </mat-chip-listbox>
                 </div>

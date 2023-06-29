@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SchoolsComponent } from './schools.component';
+import { SchoolBatteriesDataStore } from './store/school-batteries-data.store';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('SchoolsComponent', () => {
   let component: SchoolsComponent;
@@ -8,7 +10,15 @@ describe('SchoolsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SchoolsComponent]
+      declarations: [
+        SchoolsComponent,
+      ],
+      providers: [
+        SchoolBatteriesDataStore,
+      ],
+      imports: [
+        HttpClientTestingModule,
+      ]
     });
     fixture = TestBed.createComponent(SchoolsComponent);
     component = fixture.componentInstance;
